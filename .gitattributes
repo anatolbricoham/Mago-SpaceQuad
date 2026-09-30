@@ -1,0 +1,5 @@
+# El STL del mango ocupa ~24 MB. Si prefieres Git LFS:
+#   git lfs install && git lfs track "*.stl"
+*.stl binary
+*.step binary
+*.png binary

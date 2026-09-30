@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+*.gcode
+*.3mf.bak
+# STL original del mango (no se redistribuye)
+BIG SIGNAL SpaceQuad.stl
