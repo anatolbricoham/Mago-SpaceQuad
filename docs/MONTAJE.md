@@ -1,37 +1,40 @@
 # Montaje
 
-![Detalle de roscas y funda](img/mango_detalles.png)
+![Despiece](img/mango_detalles.png)
 
 ## 1. Preparar el mango
 
 1. Quita los soportes y limpia el túnel del boom. El boom de 15 mm tiene que deslizar sin forzar.
 2. Mete las **tuercas 1/4"-20**:
-   - **Arriba de la torre (walki)**: ranura horizontal en la cara delantera de la torre, 3 mm por debajo de la parte superior.
-   - **Lateral de la torre (móvil)**: ranura vertical en la cara delantera de la torre, a media altura.
    - **Culo de la empuñadura (trípode)**: ranura en el lateral de la empuñadura, junto a la base plana.
-3. Comprueba que cada tuerca quede centrada: enrosca un tornillo de 1/4" desde fuera.
-   Si alguna baila, fíjala con una gota de cianoacrilato o epoxi (sin manchar la rosca).
+   - **Arriba de la torre** (opcional, para colgar algo extra): ranura horizontal en la cara delantera de la torre.
+3. Limpia los **tres dedos de la base GoPro** (los huecos entre dedos son de 3,3 mm) y comprueba que el taladro de 5,4 mm queda libre.
+   Mete una **tuerca M5** en el nicho hexagonal del dedo grueso (el del lado +Y).
 
-## 2. Pinza del móvil
+## 2. Adaptador y mordazas
 
-1. Mete la tuerca 1/4"-20 en el hexágono de la barra por el lado del móvil. Quedará atrapada cuando enrosques el brazo.
-2. Mete la tuerca M4 en la ranura lateral de la mordaza deslizante y enrosca el tornillo M4 desde arriba.
-3. Desliza la mordaza por la barra, coloca el móvil entre las dos mordazas y aprieta el M4.
+1. Mete **una tuerca M4 en cada uno de los 4 canales** de la cara trasera del adaptador (la de los dedos). La tuerca desliza por el canal y no gira.
+2. Pon cada mordaza sobre la cara delantera, con el pie hacia fuera, y atornilla cada una con 2 tornillos M4 × 12 desde arriba por las ranuras. Déjalos flojos.
+3. Coloca el walki entre las dos mordazas, centrado sobre los dedos, y cierra las mordazas contra él. Aprieta los 4 tornillos.
+   Una tira de goma EVA o de cinta antideslizante en la cara interior de cada pared mejora el agarre.
+4. El walki queda sujeto por presión; si lo llevas en la dirección del boom, una goma de pelo alrededor de los extremos de las paredes evita que se deslice.
 
 ## 3. Montaje en la antena
 
 1. Pasa el boom de la SpaceQuad por el túnel del mango y colócalo en el punto de equilibrio.
-2. Enrosca el brazo del **walki** en la rosca de arriba y el del **móvil** en la lateral.
-3. Mete el **duplexor** en la funda por uno de sus extremos y conecta las bajadas de VHF y UHF.
+2. Mete el **duplexor** en la funda por uno de sus extremos y conecta las bajadas de VHF y UHF.
+3. Encaja los **dos dedos del adaptador** en los huecos de la base de la torre y pasa el tornillo M5: cabeza por el lado del dedo fino y tuerca en el nicho.
+   Aprieta hasta que el soporte quede firme pero se pueda mover con la mano.
+4. Con el tornillo flojo puedes inclinar el soporte unos +52° / −38°; aprieta de nuevo.
 
 ## 4. En trípode
 
 1. Saca la placa rápida de la rótula y enróscala en el culo de la empuñadura.
 2. Encaja la placa en la rótula. La empuñadura queda hacia abajo y el boom horizontal.
-3. Con la rótula apuntas en elevación y azimut. Para volver a llevarla en la mano, abre la palanca de la rótula.
 
 ## Consejos
 
-- Al girar la antena en posición de uso, la rosca lateral del móvil apunta **hacia arriba**, que va bien para ver la pantalla.
-  La del walki apunta de lado. Los brazos de rótula permiten orientarlos a tu gusto.
-- Comprueba que el móvil y el walki no queden a la altura de ningún elemento de la antena, sobre todo de los cuadros de VHF.
+- En posición de uso (empuñadura abajo), el walki queda **encima** del mango, con la pantalla hacia arriba y hacia ti al levantar el boom.
+- Comprueba que el walki no quede a la altura de ningún elemento de la antena, sobre todo de los cuadros de VHF. La placa mide 80 mm a lo largo del boom
+  y el walki puede sobresalir; si hace falta, desplaza el mango por el boom.
+- Cualquier accesorio con interfaz GoPro de 2 dedos encaja en la base de la torre.
