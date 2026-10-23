@@ -1,51 +1,65 @@
 #!/usr/bin/env python3
-"""Comprobaciones: choques, holguras y margen de giro del soporte de walki contra el mango v2.
-    python verificar.py ../stl/mango_spacequad_v2.stl"""
-import sys, numpy as np, trimesh, manifold3d as mf
-from scipy.spatial import cKDTree
+"""Comprobaciones del mango v3: pieza estanca, walki colgado de la lengueta sin tocar mango ni duplexor,
+hueco del clip y piel de la tuerca del tripode.
+    python verificar.py ../stl/mango_spacequad_v3.stl"""
+import sys, numpy as np, trimesh
+import shapely.geometry as sg
 from geom import *
-import mango_v2 as mg, soporte_walki as sw
+import mango_v3 as mg
 
-def rot_y(M, deg, cx, cz):
-    """gira la pieza alrededor del eje paralelo a Y por (x=cx, z=cz)"""
-    t = np.radians(deg); c, s = np.cos(t), np.sin(t)
-    # matriz 4x4 de manifold (3x4 por columnas)
-    R = [c, 0, -s, 0, 1, 0, s, 0, c, 0, 0, 0]
-    M = M.translate((-cx, 0, -cz)).transform(np.array([[c,0,s,0],[0,1,0,0],[-s,0,c,0]])).translate((cx, 0, cz))
-    return M
+# duplexor (el mismo bloque que se dibuja en render_docs.py) y walki tipo (ancho Y x grueso Z x alto X)
+DUP = (-33.4, -17.9, 118.0, 177.0, 28.0, 59.5)
+R_W, R_T, R_L, R_ABOVE = 62.0, 40.0, 130.0, 25.0   # R_ABOVE: lo que sobresale el walki por encima del clip
+FZ = 78.32                                          # cara +Z de la torre en v1 (base de la lengueta)
+V1 = __file__.rsplit("src", 1)[0] + "stl/mango_spacequad_tripode.stl"
 
-def vol_int(a, b):
-    return (a ^ b).volume()
+def walki(fz=FZ, w=R_W):
+    """walki apoyado en la cara exterior de la lengueta, con el clip hasta el borde superior"""
+    x_t = mg.X_BOT - mg.CLIP_L
+    zo = lambda x: mg.z_in(x, fz) + mg.PLATE_T
+    xa, xb = x_t - R_ABOVE, x_t - R_ABOVE + R_L
+    p = sg.Polygon([(xa, zo(xa)), (xb, zo(xb)), (xb, zo(xb) + R_T), (xa, zo(xa) + R_T)])
+    return prism_y(mg.xz(p), YC - w/2, YC + w/2)
 
-def main(mango_path):
-    mango = to_mf(trimesh.load(mango_path))
-    xp = FACE_X - sw.PIV_G
-    A = sw.adaptador()
-    for W in (sw.WMIN, sw.W_DEF, sw.WMAX):
-        J = sw.mordaza(+1, W) + sw.mordaza(-1, W)
-        radio = box(sw.PL_U1, sw.PL_U1 + 50.0, YC - 70, YC + 70, sw.PIV_Z - W/2, sw.PIV_Z + W/2)
-        cj = A + J
-        print(f"--- walki de {W:.0f} mm ---")
-        print("  adaptador/mango  :", round(vol_int(A, mango), 3), "mm3")
-        print("  mordazas/mango   :", round(vol_int(J, mango), 3), "mm3")
-        print("  mordazas/adapt.  :", round(vol_int(J, A), 3), "mm3  (0 = solo apoyan)")
-        print("  walki/mango      :", round(vol_int(radio, mango), 3), "mm3")
-        # holgura minima (aprox por vertices) entre el conjunto y el mango
-        mm = trimesh.load(mango_path); tree = cKDTree(mm.vertices)
-        cv = to_tm(cj + radio).vertices
-        d, _ = tree.query(cv)
-        print("  holgura minima   :", round(d.min(), 2), "mm (aprox.)")
-        lim = []
-        for sgn in (+1, -1):
-            ok = 0
-            for deg in range(0, 61, 2):
-                if vol_int(rot_y(cj + radio, sgn*deg, xp, sw.PIV_Z), mango) > 0.5: break
-                ok = deg
-            lim.append(ok)
-        print(f"  giro libre alrededor del pivote: +{lim[0]} / -{lim[1]} grados")
-    # dedos macho/hembra
-    m = to_tm(mango); 
-    print("dedos: interseccion macho/hembra =", round(vol_int(A, mango), 3))
+def duplexor():
+    return to_mf(trimesh.creation.box(bounds=[DUP[0::2], DUP[1::2]]))
+
+def main(path):
+    m = trimesh.load(path)
+    mango, dup = to_mf(m), duplexor()
+    ok = True
+    def check(name, cond, val=""):
+        nonlocal ok; ok &= bool(cond)
+        print(f"  [{'OK' if cond else 'FALLO'}] {name} {val}")
+    print("pieza:")
+    check("estanca (manifold)", mango.status().name == "NoError")
+    vols = [c.volume() for c in mango.decompose()]     # el hueco interior de la empunadura sale con volumen < 0
+    check("un solo solido", sum(v > 0 for v in vols) == 1, f"{mango.volume()/1000:.1f} cm3")
+    print("walki:")
+    for w in (50.0, R_W, 70.0):
+        W = walki(w=w)
+        check(f"walki {w:.0f} mm / mango", (W ^ mango).volume() < 0.01, f"{(W ^ mango).volume():.3f} mm3")
+        check(f"walki {w:.0f} mm / duplexor", (W ^ dup).volume() < 0.01)
+    d = trimesh.proximity.signed_distance(to_tm(walki()), to_tm(dup).vertices)
+    check("separacion walki-duplexor > 10 mm", -d.max() > 10, f"{-d.max():.1f} mm")
+    # el bloque del duplexor es aproximado y ya roza la funda del v1: se exige no anadir nada
+    v1 = to_mf(trimesh.load(V1))
+    extra = (dup ^ mango).volume() - (dup ^ v1).volume()
+    check("duplexor: nada nuevo respecto a v1", abs(extra) < 0.01, f"{extra:.3f} mm3")
+    print("funda del clip:")
+    x_mid = mg.X_BOT - mg.CLIP_L / 2
+    zb, zi = FZ + mg.BACK_T, mg.z_in(x_mid, FZ)
+    inside = m.contains([[x_mid, YC, zb + 0.5], [x_mid, YC + mg.W_IN/2 - 0.5, (zb + zi) / 2],
+                         [x_mid, YC, zi + mg.PLATE_T / 2]])
+    check("hueco libre para la lengua del clip", not inside[0] and not inside[1],
+          f"{zi - zb:.1f} mm a media altura ({mg.G_BOT}-{mg.G_TOP})")
+    check("lengueta maciza", inside[2], f"{mg.PLATE_T} mm")
+    print("tuerca del tripode:")
+    face, sk, y = mg.BUTT_FACE, mg.TRIPOD_SKIN, mg.T_YC + 4.5
+    inside = m.contains([[face - sk / 2, y, mg.T_ZC], [face - sk - 1, y, mg.T_ZC], [face - sk - mg.NUT_T - 0.5, y, mg.T_ZC]])
+    check("piel delante de la tuerca", inside[0] and not inside[1], f"{sk} mm (v1: {mg.OLD_SKIN} mm)")
+    check("nicho viejo relleno", inside[2])
+    print("TODO OK" if ok else "HAY FALLOS"); return ok
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    sys.exit(0 if main(sys.argv[1]) else 1)

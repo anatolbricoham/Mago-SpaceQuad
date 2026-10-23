@@ -1,31 +1,26 @@
 # Montaje
 
-![Despiece](img/mango_detalles.png)
+![Detalle de la lengüeta](img/mango_detalles.png)
 
 ## 1. Preparar el mango
 
 1. Quita los soportes y limpia el túnel del boom. El boom de 15 mm tiene que deslizar sin forzar.
-2. Mete las **tuercas 1/4"-20**:
-   - **Culo de la empuñadura (trípode)**: ranura en el lateral de la empuñadura, junto a la base plana.
-   - **Arriba de la torre** (opcional, para colgar algo extra): ranura horizontal en la cara delantera de la torre.
-3. Limpia los **tres dedos de la base GoPro** (los huecos entre dedos son de 3,3 mm) y comprueba que el taladro de 5,4 mm queda libre.
-   Mete una **tuerca M5** en el nicho hexagonal del dedo grueso (el del lado +Y).
+2. Limpia el interior de la **funda del clip** (la caja abierta por arriba en el lateral de la torre) y la ventana de la lengüeta.
+3. Mete la **tuerca 1/4"-20** del trípode por la ranura del lateral de la empuñadura, junto a la base plana.
+   Queda a 1,2 mm de la cara, así que el tornillo de la placa rápida coge casi toda la tuerca.
 
-## 2. Adaptador y mordazas
-
-1. Mete **una tuerca M4 en cada uno de los 4 canales** de la cara trasera del adaptador (la de los dedos). La tuerca desliza por el canal y no gira.
-2. Pon cada mordaza sobre la cara delantera, con el pie hacia fuera, y atornilla cada una con 2 tornillos M4 × 12 desde arriba por las ranuras. Déjalos flojos.
-3. Coloca el walki entre las dos mordazas, centrado sobre los dedos, y cierra las mordazas contra él. Aprieta los 4 tornillos.
-   Una tira de goma EVA o de cinta antideslizante en la cara interior de cada pared mejora el agarre.
-4. El walki queda sujeto por presión; si lo llevas en la dirección del boom, una goma de pelo alrededor de los extremos de las paredes evita que se deslice.
-
-## 3. Montaje en la antena
+## 2. Montaje en la antena
 
 1. Pasa el boom de la SpaceQuad por el túnel del mango y colócalo en el punto de equilibrio.
-2. Mete el **duplexor** en la funda por uno de sus extremos y conecta las bajadas de VHF y UHF.
-3. Encaja los **dos dedos del adaptador** en los huecos de la base de la torre y pasa el tornillo M5: cabeza por el lado del dedo fino y tuerca en el nicho.
-   Aprieta hasta que el soporte quede firme pero se pueda mover con la mano.
-4. Con el tornillo flojo puedes inclinar el soporte unos +52° / −38°; aprieta de nuevo.
+2. Mete el **duplexor** en su funda por uno de sus extremos y conecta las bajadas de VHF y UHF.
+
+## 3. Enganchar el walki
+
+1. Con la empuñadura hacia abajo, la funda del clip queda en un lateral de la torre con la boca hacia arriba.
+2. Pon el walki con la espalda contra la cara exterior de la lengüeta y mete la **lengua del clip de cinturón** por la boca,
+   entre la lengüeta y la torre, igual que en un cinturón.
+3. Empuja hasta que el clip toque el borde de arriba de la lengüeta. Si el clip tiene un saliente, encajará en la ventana.
+4. Para sacarlo, levanta el walki apretando la parte de arriba del clip.
 
 ## 4. En trípode
 
@@ -34,7 +29,7 @@
 
 ## Consejos
 
-- En posición de uso (empuñadura abajo), el walki queda **encima** del mango, con la pantalla hacia arriba y hacia ti al levantar el boom.
-- Comprueba que el walki no quede a la altura de ningún elemento de la antena, sobre todo de los cuadros de VHF. La placa mide 80 mm a lo largo del boom
-  y el walki puede sobresalir; si hace falta, desplaza el mango por el boom.
-- Cualquier accesorio con interfaz GoPro de 2 dedos encaja en la base de la torre.
+- El walki cuelga por el lateral de la torre, con la pantalla hacia fuera, y queda a casi 3 cm del duplexor.
+- Comprueba que el walki no quede a la altura de ningún elemento de la antena, sobre todo de los cuadros de VHF.
+  Si hace falta, desplaza el mango por el boom.
+- Si el clip de tu walki queda flojo, pega una tira fina de goma EVA en la cara exterior de la lengüeta.

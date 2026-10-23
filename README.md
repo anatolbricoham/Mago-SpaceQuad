@@ -2,27 +2,27 @@
   <img src="docs/img/bricohams_logo.png" alt="Bricohams" width="420">
 </p>
 
-# Mango SpaceQuad con trípode, soporte universal de walki y duplexor
+# Mango SpaceQuad con trípode, soporte de walki por clip y duplexor
 
 Mango imprimible en 3D para la antena de satélites **BIG SIGNAL SpaceQuad** (VHF/UHF, boom cuadrado de 15 mm).
-Se puede llevar en la mano o montar en un trípode de fotografía, y lleva un **soporte universal para el walki**
+Se puede llevar en la mano o montar en un trípode de fotografía. Lleva una **lengüeta para el clip de cinturón del walki**
 y una funda para el duplexor.
 
 <p align="center">
   <img src="docs/img/vista_uso.png" alt="Conjunto en posición de uso" width="90%">
 </p>
 
-## Novedades de la v2
+## Novedades de la v3
 
-- **Soporte de walki nuevo, tipo GoPro** (el enganche más extendido en las webs de impresión 3D). Va en la cara libre de la torre,
-  la que queda **arriba** al usar la antena, así que ya no choca con el duplexor y tiene sitio de sobra.
-- **Universal**: dos mordazas ajustables que admiten walkis de **50 a 86 mm de ancho** y hasta **54 mm de grosor**
-  (desde los Baofeng/AnyTone/Retevis hasta los más anchos del mercado, tipo Motorola APX/XTS).
-- Se **retira la función del móvil** (la rosca lateral 1/4" y su brazo): por el ángulo no era útil. La pinza antigua queda en `legacy/`.
-- El mango conserva la rosca 1/4" de arriba de la torre, la funda del duplexor y la base de trípode.
+- **Soporte de walki integrado en el mango**: una lengüeta en el lateral de la torre donde se engancha el **clip de cinturón**
+  del propio walki, como si fuera un cinturón. Es una sola pieza, sin tornillos ni mordazas.
+  El walki cuelga por el lateral, a casi 3 cm del duplexor, así que ya no choca con él.
+- **Rosca del trípode corregida**: la tuerca 1/4"-20 queda a **1,2 mm** de la cara del culo (antes a 3 mm).
+  Los tornillos de las placas rápidas son cortos (5–6 mm) y antes apenas cogían rosca.
+- Se retira la base GoPro de la v2, con su adaptador y sus mordazas. Están en `legacy/soporte_gopro/`.
 
 <p align="center">
-  <img src="docs/img/mango_detalles.png" alt="Despiece" width="70%">
+  <img src="docs/img/mango_detalles.png" alt="Detalle de la lengüeta" width="70%">
 </p>
 
 ## Características
@@ -30,8 +30,8 @@ y una funda para el duplexor.
 - **Encaja en el boom de la SpaceQuad**: túnel de 15,5 × 15,5 mm para el boom cuadrado de 15 mm (0,5 mm de holgura).
 - **Rosca de trípode en el culo de la empuñadura**: tuerca 1/4"-20 embutida en una base plana de 52 × 31 mm.
   La empuñadura queda hacia abajo y el boom horizontal, igual que al llevarla en la mano.
-- **Base GoPro de 3 dedos** integrada en la torre (pivote a 24 mm de la cara, eje paralelo al boom): el walki se puede
-  inclinar unos grados hacia cada lado (ver *Margen de giro*).
+- **Lengüeta para el clip**: 4 mm de grosor y 70 mm de largo. Funda con hueco en cuña (de 4 mm abajo a 9 mm en la boca)
+  y paredes laterales que dejan **42 mm** de ancho para la lengua del clip. Tiene una ventana para el saliente del clip.
 - **Funda para el duplexor** VHF/UHF entre la torre y el boom: 16 × 32 mm por dentro, 48 mm de largo, abierta por los extremos.
 - **Paramétrico**: todo se genera con scripts de Python (trimesh + manifold3d), así que las medidas se pueden adaptar.
 
@@ -39,13 +39,11 @@ y una funda para el duplexor.
 
 ```
 stl/    Piezas listas para imprimir (ya orientadas)
-  mango_spacequad_v2.stl         Mango v2 (base GoPro + funda duplexor + base de trípode)
-  adaptador_gopro_walki.stl      Placa con dedos GoPro y ranuras para las mordazas   (x1)
-  mordaza_walki.stl              Mordaza ajustable                                   (x2, imprimir dos iguales)
-  mango_spacequad_tripode.stl    Mango v1 (se conserva: es la entrada de mango_v2.py)
+  mango_spacequad_v3.stl         Mango v3 (lengüeta para el clip + funda duplexor + base de trípode)
+  mango_spacequad_tripode.stl    Mango v1 (se conserva: es la entrada de mango_v3.py)
 src/    Scripts paramétricos que generan las piezas
 docs/   Imágenes, montaje y lista de materiales
-legacy/ Pinza del móvil de la v1 (ya no se usa)
+legacy/ Pinza del móvil (v1) y soporte GoPro con mordazas (v2), ya no se usan
 ```
 
 ## Materiales
@@ -54,56 +52,55 @@ Lista completa en [docs/MATERIALES.md](docs/MATERIALES.md). En resumen:
 
 | Cantidad | Pieza |
 |---|---|
-| 1 | Tornillo M5 × 20 + tuerca M5 (o un tornillo de pomo GoPro estándar) |
-| 4 | Tornillo M4 × 12 (cabeza cilíndrica o allen, Ø máx. 7 mm) |
-| 4 | Tuerca M4 |
-| 2 | Tuerca hexagonal 1/4"-20 UNC (11,1 mm entre caras): trípode y rosca de arriba (opcional) |
+| 1 | Tuerca hexagonal 1/4"-20 UNC (11,1 mm entre caras) para el trípode (opcional) |
+
+El walki se sujeta con su propio clip de cinturón: no hace falta tornillería.
 
 ## Impresión
 
 | Pieza | Material | Orientación | Soportes |
 |---|---|---|---|
-| Mango v2 | PETG o ASA (exterior, al sol) | La del STL | Sí, desde la cama (bajo la empuñadura y la torre) |
-| Adaptador | PETG | Placa en la cama, dedos hacia arriba | No |
-| Mordazas (x2) | PETG | Pie en la cama, pared hacia arriba | No |
+| Mango v3 | PETG o ASA (exterior, al sol) | La del STL | Sí, desde la cama (bajo la empuñadura, la torre y la lengüeta) |
 
-0,2 mm de capa, 4 perímetros, 30–40 % de relleno (los dedos GoPro y las paredes de las mordazas conviene que sean casi macizos).
-Si el dedo macho no entra en los huecos de la base, repasa los huecos con una cuchilla; la holgura de diseño es de 0,15 mm por lado.
+0,2 mm de capa, 4 perímetros y 30–40 % de relleno. La lengüeta conviene que salga casi maciza (4 perímetros la llenan).
+Limpia bien los soportes del interior de la funda del clip.
 
 ## Montaje
 
 Pasos detallados en [docs/MONTAJE.md](docs/MONTAJE.md).
 
-1. Mete las tuercas 1/4"-20 por sus ranuras (culo de la empuñadura y, si quieres, arriba de la torre).
+1. Mete la tuerca 1/4"-20 por su ranura del culo de la empuñadura.
 2. Pasa el boom de la SpaceQuad por el túnel del mango y mete el duplexor en su funda.
-3. Mete 4 tuercas M4 en los canales de la parte trasera del adaptador y atornilla las dos mordazas por las ranuras
-   (tornillo desde arriba) dejándolas flojas.
-4. Cierra las mordazas sobre el walki y aprieta los 4 tornillos.
-5. Encaja los dedos del adaptador entre los de la torre y pasa el tornillo M5 (cabeza por el lado de la rosca de trípode, tuerca en el nicho del dedo grueso).
+3. Engancha el walki: mete su clip de cinturón por arriba, entre la lengüeta y la torre, y empújalo hasta el fondo.
 
-## Margen de giro
+## Compatibilidad del clip
 
-Con el walki montado se puede girar el soporte unos **+52° / −38°** alrededor del eje del pivote antes de tocar la torre
-(calculado con `src/verificar.py`, igual para 50, 62 y 86 mm de ancho de walki).
+| Dato | Valor |
+|---|---|
+| Ancho de la lengua del clip | hasta 42 mm |
+| Largo de la lengua | hasta 65 mm |
+| Abertura del clip | al menos 4 mm (lo que mide la lengüeta) |
+
+Sirve para los clips de la mayoría de walkis (Baofeng, Yaesu, Kenwood, AnyTone, Retevis…). Las medidas se cambian en `src/mango_v3.py`.
 
 ## Regenerar las piezas
 
 ```bash
 pip install -r src/requirements.txt
 cd src
-python mango_v2.py ../stl/mango_spacequad_tripode.stl ../stl/mango_spacequad_v2.stl
-python soporte_walki.py ../stl
-python verificar.py ../stl/mango_spacequad_v2.stl      # choques, holguras y margen de giro
+python mango_v3.py ../stl/mango_spacequad_tripode.stl ../stl/mango_spacequad_v3.stl
+python verificar.py ../stl/mango_spacequad_v3.stl      # pieza estanca, choques, hueco del clip y tuerca del trípode
 python render_docs.py ../stl ../docs/img                # imágenes
 ```
 
-`mango_v2.py` parte del STL v1 incluido en el repositorio. `build_mango.py` (v1) parte del **STL original del mango**,
+`mango_v3.py` parte del STL v1 incluido en el repositorio. `build_mango.py` (v1) parte del **STL original del mango**,
 que no está incluido (ver *Créditos*) y necesita además `cadquery`.
-Las medidas (anchos de walki, pivote, tornillería) se cambian en la sección `PARAMETROS` de cada script.
+Las medidas se cambian en la sección `PARAMETROS` de cada script.
 
 ## Estado
 
-Diseño verificado en el ordenador (piezas estancas, 0 mm³ de interferencias con el mango, el duplexor y walkis de 50/62/86 mm).
+Diseño verificado en el ordenador: pieza estanca, walkis de 50, 62 y 70 mm sin tocar el mango ni el duplexor
+(28,6 mm de separación) y 0 mm³ añadidos sobre el duplexor respecto a la v1.
 **Aún sin probar impresa**: si algún ajuste no encaja, se abre un issue o se toca el parámetro correspondiente.
 
 ## Créditos y licencia
@@ -112,7 +109,6 @@ Diseño verificado en el ordenador (piezas estancas, 0 mm³ de interferencias co
   Este proyecto es una modificación de su diseño y respeta su licencia original.
 - Modificaciones, soporte de walki y scripts: **Bricohams**.
 - BIG SIGNAL y SpaceQuad son marcas de sus respectivos propietarios. Este proyecto no está afiliado a ellos.
-- GoPro es una marca de GoPro, Inc.; el interfaz de 3 dedos se usa solo por compatibilidad.
 
 Licencia: [CC BY-SA 4.0](LICENSE) para los modelos y la documentación. Los scripts de `src/` también se
 publican bajo CC BY-SA 4.0. Si la licencia del diseño original es distinta, **manda la del original**.
