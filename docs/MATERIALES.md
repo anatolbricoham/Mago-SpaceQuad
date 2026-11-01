@@ -4,15 +4,15 @@
 
 | Archivo | Cantidad | Volumen aprox. | Notas |
 |---|---|---|---|
-| `stl/mango_spacequad_v3.stl` | 1 | 214 cm³ (sólido) | Con soportes. PETG o ASA |
+| `stl/mango_spacequad_v4.stl` | 1 | 201 cm³ (sólido) | Con soportes. PETG o ASA |
 
-El volumen es el del modelo macizo. Con 4 perímetros y un 35 % de relleno el mango gasta unos 110–130 g de filamento.
+El volumen es el del modelo macizo. Con 4 perímetros y un 35 % de relleno el mango gasta unos 105–125 g de filamento.
 
 ## Tornillería
 
 | Cantidad | Pieza | Dónde va |
 |---|---|---|
-| 1 | Tuerca hexagonal 1/4"-20 UNC (11,1 mm e/c, 5,6 mm de grosor) | Culo de la empuñadura (trípode). Opcional |
+| 2 | Tuercas hexagonales 1/4"-20 UNC (11,1 mm e/c, 5,6 mm de grosor) | Culo de la empuñadura (trípode), apiladas. Opcional; con una basta si el tornillo es largo |
 
 ## Accesorios comerciales
 
@@ -26,7 +26,7 @@ El volumen es el del modelo macizo. Con 4 perímetros y un 35 % de relleno el ma
 
 | Dato | Valor |
 |---|---|
-| Ancho de la lengua del clip | hasta 42 mm |
-| Largo de la lengua del clip | hasta 65 mm |
-| Grosor de la lengüeta (abertura mínima del clip) | 4 mm |
+| Ancho de la lengua del clip | de 25 a 45 mm |
+| Grosor de la lengua del clip | hasta 6 mm |
+| Grosor de los labios (abertura mínima del clip) | de 1,5 a 4,5 mm |
 | Walki | cualquiera con clip de cinturón dentro de estas medidas |

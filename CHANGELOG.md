@@ -1,5 +1,11 @@
 # Cambios
 
+## v4.0.0 — 2026-11-01
+- Canal universal en V para el clip del walki en la cara superior de la empuñadura (lenguas de 25 a 45 mm y hasta 6 mm de grosor).
+  Labios en cola de milano a 45° (sin soportes); la lengua baja por la V hasta acuñarse. Sustituye a la lengüeta de la torre de la v3.
+- Ranura del trípode para dos tuercas 1/4"-20 apiladas (rosca a 1,2 mm de la cara; 8,8 mm de rosca con un tornillo de 10 mm).
+- `mango_v3.py` pasa a `mango_v4.py`; `verificar.py` comprueba el canal, los voladizos nuevos y la rosca del trípode.
+
 ## v3.0.0 — 2026-10-23
 - Soporte de walki integrado: lengüeta para el clip de cinturón en el lateral de la torre (una sola pieza, sin tornillos).
   El walki queda a 28,6 mm del duplexor.
