@@ -1,5 +1,12 @@
 # Cambios
 
+## Revisión de placa baja v3 — 2026-11-01
+- Sustituye la funda vertical por placa de 55 × 48 × 4 mm a 20°, 47 mm libres, recorrido de 40 mm, espacio de 7 mm y ventana opcional de 22 × 6 mm.
+- Dos cartelas de 4 mm con pies V140..154 a H54, embebidos 4,64 mm en la torre existente; bajos abiertos, sin losa.
+- Conserva empuñadura, boom y trípode. Verificación contra 35019cc, pies finitos y barridos continuos de clip y radio+clip.
+- Corredores V del duplexor sin obstrucción nueva; colisión nominal heredada de v1 (462,2388 mm³) documentada, no ocultada.
+- Renders CAD y resultados JSON actualizados. Dimensiones de clip/radio estimadas; sin prueba física ni certificación estructural.
+
 ## v3.1.0 — 2026-11-01
 - Se restaura la v3 (c77de14) como modelo activo: lengüeta del clip en la torre y tuerca única de trípode a 1,2 mm (ranura de 5,9 mm; rosca limitada por la tuerca real, 5,6 mm nominal).
 - Solo cambia el soporte del clip: lengüeta elevada más ancha (boca 50 mm, fondo 47 mm, 70 mm útiles, holgura mín. 7 mm, paredes en cuña), conserva la ventana rectangular de 22 × 6 mm.

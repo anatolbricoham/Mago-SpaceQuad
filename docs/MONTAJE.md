@@ -16,12 +16,12 @@
 
 ## 3. Enganchar el walki
 
-1. Con la empuñadura hacia abajo, la lengüeta ancha queda en la cara superior de la torre, lejos del duplexor.
-2. Abre el clip y baja su lengua por la boca de la lengüeta, entre ella y la torre. El walki cuelga por fuera, como en un cinturón.
-3. Déjala bajar; puede entrar hasta 70 mm. El muelle del clip aprieta la lengua contra la lengüeta. La ventana rectangular
+1. Con la empuñadura hacia abajo, la placa queda a 20° sobre la horizontal de la torre, lejos del duplexor.
+2. Abre el clip y desliza su lengua desde el extremo alto (+V), paralelo a la placa, por debajo de ella. El walki queda encima.
+3. Puede entrar 40 mm. El muelle del clip aprieta la lengua contra la placa. La ventana rectangular
    de 22 × 6 mm es una retención opcional: solo engancha si el saliente del clip coincide con ella.
 4. Los clips estrechos (25–30 mm) quedan holgados lateralmente: se sujetan solo por el muelle del clip, sin centrado.
-5. Para sacarlo, súbelo apretando la parte de arriba del clip.
+5. Para sacarlo, abre el clip y deslízalo hacia el extremo alto, paralelo a la placa.
 
 Las medidas (25–45 mm × 6 mm) son estimaciones, no medidas verificadas: prueba el clip de tu walki antes de fiarte.
 ## 4. En trípode
@@ -32,7 +32,10 @@ Las medidas (25–45 mm × 6 mm) son estimaciones, no medidas verificadas: prueb
 
 ## Consejos
 
-- El walki cuelga por fuera de la lengüeta, con la pantalla hacia fuera, y queda lejos del duplexor.
+- La radio de los renders es una envolvente estimada solidaria con el clip; queda inclinada sobre la placa, no vertical.
+- Retira los soportes bajo la placa y comprueba los 7 mm libres. No rellenes el espacio abierto entre las cartelas.
+- Los pies de las cartelas están embebidos en la torre, pero no hay certificación de carga: prueba primero con lastre y usa retención secundaria.
+- La caja nominal del duplexor roza la funda original; los corredores conservados no garantizan ajuste real.
 - Comprueba que el walki no quede a la altura de ningún elemento de la antena, sobre todo de los cuadros de VHF.
   Si hace falta, desplaza el mango por el boom.
 - Si el clip de tu walki queda flojo, pega una tira fina de goma EVA en la cara exterior de la lengüeta.

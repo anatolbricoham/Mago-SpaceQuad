@@ -4,9 +4,9 @@
 
 | Archivo | Cantidad | Volumen aprox. | Notas |
 |---|---|---|---|
-| `stl/mango_spacequad_v3.stl` | 1 | 224 cm³ (sólido) | Con soportes. PETG o ASA |
+| `stl/mango_spacequad_v3.stl` | 1 | 192 cm³ (sólido) | Con soportes bajo placa/cartelas. PETG o ASA |
 
-El volumen es el del modelo macizo. Con 4 perímetros y un 35 % de relleno el mango gasta unos 105–125 g de filamento.
+El volumen es el del modelo macizo. Consulta el laminador para el consumo con relleno y soportes.
 
 ## Tornillería
 
@@ -26,7 +26,7 @@ El volumen es el del modelo macizo. Con 4 perímetros y un 35 % de relleno el ma
 
 | Dato | Valor |
 |---|---|
-| Ancho de la lengua del clip (estimado, no medido) | de 25 a 45 mm; boca 50 mm, fondo 47 mm |
+| Ancho de la lengua del clip (estimado, no medido) | de 25 a 45 mm; 47 mm libres |
 | Grosor de la lengua del clip (estimado) | hasta 6 mm (holgura mínima 7 mm) |
-| Largo útil (estimado) | 70 mm |
+| Recorrido útil (estimado) | 40 mm, paralelo a placa de 55 × 48 × 4 mm a 20° |
 | Walki | clips de cinturón de Baofeng, Radtel, Anytone, Quansheng, Retevis RT3S: no medidos, sin garantía de ajuste universal |

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Genera las imagenes de docs/img (vista de uso, detalle y primer plano de la lengueta del clip). Requiere pyvista.
+"""Genera renders CAD de la placa baja, cartelas y conjunto radio+clip estimado. Requiere pyvista.
     python render_docs.py ../stl ../docs/img"""
 import sys, os, numpy as np, trimesh, pyvista as pv
 from geom import *
@@ -15,8 +15,9 @@ def main(stl_dir, out):
     os.makedirs(out, exist_ok=True)
     mango = trimesh.load(os.path.join(stl_dir, 'mango_spacequad_v3.stl'))
     radio, dup = to_tm(vf.walki()), to_tm(vf.duplexor())
+    clip = to_tm(vf.radio_clip())
     boom = bx(-7.5,7.5,60,300,8,23.1)
-    parts = [(mango,'#8d9399',1),(radio,'#2e9e5b',0.6),(boom,'#c9ced3',1),(dup,'#c0392b',1)]
+    parts = [(mango,'#8d9399',1),(radio,'#2e9e5b',0.6),(clip,'#244a85',1),(boom,'#c9ced3',1),(dup,'#c0392b',1)]
     # --- vista de uso
     pl = pv.Plotter(off_screen=True, shape=(1,2), window_size=(1600,760))
     c = np.array([60, 150, 40.0])
@@ -25,25 +26,27 @@ def main(stl_dir, out):
         for m,col,op in parts: pl.add_mesh(pv.wrap(rot(m)), color=col, opacity=op, smooth_shading=False)
         pl.camera_position = [tuple(c+np.array(v)*480), tuple(c), (0,0,1)]
         pl.set_background('white')
-    pl.subplot(0,0); pl.add_text('Posicion de uso: empunadura abajo. Verde: walki colgado del clip   Rojo: duplexor', font_size=9, position='lower_left', color='black')
-    pl.screenshot(os.path.join(out,'vista_uso.png'))
+    pl.subplot(0,0); pl.add_text('Uso: empunadura abajo. Verde: radio estimada / azul: clip / rojo: duplexor', font_size=9, position='lower_left', color='black')
+    pl.screenshot(os.path.join(out,'vista_uso.png')); pl.close()
     # --- detalle del canal del clip (sin walki)
     pl = pv.Plotter(off_screen=True, window_size=(1100,900))
     pl.add_mesh(pv.wrap(rot(mango)), color='#8d9399')
     pl.add_mesh(pv.wrap(rot(dup)), color='#c0392b')
     pl.set_background('white')
-    c = np.array([75, 150, 50.0])
+    c = np.array([45, 150, 60.0])
     pl.camera_position = [tuple(c+np.array([1.0,-1.1,0.9])*300), tuple(c), (0,0,1)]
-    pl.add_text('Mango v3: lengueta en cuna para el clip del walki (dimensiones del clip estimadas)', font_size=11, position='upper_left', color='black')
-    pl.screenshot(os.path.join(out,'mango_detalles.png'))
+    pl.add_text('Mango v3: placa baja a 20 grados, dos cartelas y bajos abiertos', font_size=11, position='upper_left', color='black')
+    pl.screenshot(os.path.join(out,'mango_detalles.png')); pl.close()
     # --- primer plano de la lengueta con ventana de retencion (equivalente a la imagen de referencia)
     pl = pv.Plotter(off_screen=True, window_size=(1100,800))
     pl.add_mesh(pv.wrap(rot(mango)), color='#bdb98c', show_edges=False)
     pl.set_background('white')
-    c = np.array([95, 147.6, 75.0])
-    pl.camera_position = [tuple(c+np.array([0.9,-1.0,1.0])*110), tuple(c), (0,0,1)]
-    pl.add_text('Primer plano: lengueta ancha en cuna con ventana rectangular de retencion', font_size=11, position='upper_left', color='black')
-    pl.screenshot(os.path.join(out,'clip_detalle.png'))
+    c = np.array([40, 145, 0.0])
+    pl.camera_position = [tuple(c+np.array([0.9,1.0,0.65])*220), tuple(c), (0,0,1)]
+    pl.camera.parallel_projection = True
+    pl.camera.parallel_scale = 110
+    pl.add_text('Placa inclinada 20 grados / cartelas / ventana opcional 22 x 6 mm', font_size=11, position='upper_left', color='black')
+    pl.screenshot(os.path.join(out,'clip_detalle.png')); pl.close()
 
 if __name__ == '__main__':
     main(*sys.argv[1:3])

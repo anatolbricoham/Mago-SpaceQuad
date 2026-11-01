@@ -1,0 +1,275 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "manifold",
+      "passed": true,
+      "canonical_watertight": true,
+      "raw_trimesh_watertight": false,
+      "baseline_raw_trimesh_watertight": false,
+      "status": "NoError"
+    },
+    {
+      "name": "one_solid",
+      "passed": true,
+      "solids": 1,
+      "volume_mm3": 191951.48846644803
+    },
+    {
+      "name": "mount_changes_localized",
+      "passed": true,
+      "outside_mm3": 7.121100769873127e-05,
+      "changed_mm3": 54603.66449668461,
+      "baseline": "35019cc"
+    },
+    {
+      "name": "grip_exact",
+      "passed": true,
+      "symmetric_difference_mm3": 1.2284691592978955e-07
+    },
+    {
+      "name": "boom_exact",
+      "passed": true,
+      "symmetric_difference_mm3": 1.2705494208814505e-21
+    },
+    {
+      "name": "tripod_exact",
+      "passed": true,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "grip_cavity_exact",
+      "passed": true,
+      "cavities_mm3": [
+        -32020.9
+      ]
+    },
+    {
+      "name": "plate_dimensions",
+      "passed": true,
+      "thickness_mm": 4.0,
+      "angle_deg": 20.0,
+      "width_mm": 55.0,
+      "clear_width_mm": 47.0,
+      "insertion_mm": 40.0
+    },
+    {
+      "name": "plate_above_duplexor",
+      "passed": true,
+      "underside_min_h": 65.0
+    },
+    {
+      "name": "gussets_above_36",
+      "passed": true,
+      "minimum_h": 54.0
+    },
+    {
+      "name": "gusset_1_anchored",
+      "passed": true,
+      "anchor_overlap_mm3": 330.8546579512923,
+      "minimum_verified_embed_mm": 3,
+      "minimum_verified_span_mm": 10.0,
+      "verified_foot_volume_mm3": 90.0,
+      "missing_foot_mm3": 0.0,
+      "nominal_embed_mm": 4.640000000000001
+    },
+    {
+      "name": "gusset_2_anchored",
+      "passed": true,
+      "anchor_overlap_mm3": 323.30860005352497,
+      "minimum_verified_embed_mm": 3,
+      "minimum_verified_span_mm": 10.0,
+      "verified_foot_volume_mm3": 69.00009155273438,
+      "missing_foot_mm3": 0.0,
+      "nominal_embed_mm": 4.640000000000001
+    },
+    {
+      "name": "continuous_clip_25_0.05",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "collision_mm3": 0.0
+    },
+    {
+      "name": "continuous_clip_25_0.5",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "collision_mm3": 0.0
+    },
+    {
+      "name": "continuous_clip_25_0.95",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "collision_mm3": 0.0
+    },
+    {
+      "name": "continuous_clip_30_0.05",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "collision_mm3": 0.0
+    },
+    {
+      "name": "continuous_clip_30_0.5",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "collision_mm3": 0.0
+    },
+    {
+      "name": "continuous_clip_30_0.95",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "collision_mm3": 0.0
+    },
+    {
+      "name": "continuous_clip_35_0.05",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "collision_mm3": 0.0
+    },
+    {
+      "name": "continuous_clip_35_0.5",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "collision_mm3": 0.0
+    },
+    {
+      "name": "continuous_clip_35_0.95",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "collision_mm3": 0.0
+    },
+    {
+      "name": "continuous_clip_40_0.05",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "collision_mm3": 0.0
+    },
+    {
+      "name": "continuous_clip_40_0.5",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "collision_mm3": 0.0
+    },
+    {
+      "name": "continuous_clip_40_0.95",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "collision_mm3": 0.0
+    },
+    {
+      "name": "continuous_clip_45_0.05",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "collision_mm3": 0.0
+    },
+    {
+      "name": "continuous_clip_45_0.5",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "collision_mm3": 0.0
+    },
+    {
+      "name": "continuous_clip_45_0.95",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "collision_mm3": 0.0
+    },
+    {
+      "name": "seven_mm_gap",
+      "passed": true,
+      "collision_mm3": -4.547473508864641e-13
+    },
+    {
+      "name": "open_underside",
+      "passed": true
+    },
+    {
+      "name": "optional_hook_window",
+      "passed": true
+    },
+    {
+      "name": "plate_solid_around_window",
+      "passed": true
+    },
+    {
+      "name": "actual_plate_four_mm_faces",
+      "passed": true
+    },
+    {
+      "name": "duplexor_no_new_collision",
+      "passed": true,
+      "new_collision_mm3": 0.0,
+      "inherited_v1_collision_mm3": 462.2387792257125,
+      "baseline_delta_mm3": 0.0
+    },
+    {
+      "name": "duplexor_corridor_minus_v",
+      "passed": true,
+      "added_collision_mm3": 0.0,
+      "changed_mm3": 0.0,
+      "inherited_collision_mm3": 462.2387792257125
+    },
+    {
+      "name": "radio_clear_of_minus_v_corridor",
+      "passed": true
+    },
+    {
+      "name": "duplexor_corridor_plus_v",
+      "passed": true,
+      "added_collision_mm3": 0.0,
+      "changed_mm3": 0.0,
+      "inherited_collision_mm3": 462.2387792257125
+    },
+    {
+      "name": "radio_clear_of_plus_v_corridor",
+      "passed": true
+    },
+    {
+      "name": "radio_50_clear",
+      "passed": true,
+      "mango_collision_mm3": 0.0,
+      "duplexor_collision_mm3": 0.0
+    },
+    {
+      "name": "radio_50_clip_connected",
+      "passed": true
+    },
+    {
+      "name": "radio_62_clear",
+      "passed": true,
+      "mango_collision_mm3": 0.0,
+      "duplexor_collision_mm3": 0.0
+    },
+    {
+      "name": "radio_62_clip_connected",
+      "passed": true
+    },
+    {
+      "name": "radio_70_clear",
+      "passed": true,
+      "mango_collision_mm3": 0.0,
+      "duplexor_collision_mm3": 0.0
+    },
+    {
+      "name": "radio_70_clip_connected",
+      "passed": true
+    },
+    {
+      "name": "clip_clear",
+      "passed": true,
+      "mango_collision_mm3": 0.0003059663731619366
+    },
+    {
+      "name": "continuous_full_assembly_sweep",
+      "passed": true,
+      "sweep_mm": 40.0,
+      "mango_collision_mm3": 0.0003059663731619366,
+      "duplexor_collision_mm3": 0.0
+    }
+  ],
+  "limitations": [
+    "Estimated clips/radio; not physically tested.",
+    "Nominal duplexor box intersects original v1 housing; no new obstruction allowed.",
+    "Raw trimesh welding reports non-watertight texture degeneracies also present in baseline; canonical manifold mesh is watertight.",
+    "Finite gusset attachment is not a strength certification."
+  ]
+}

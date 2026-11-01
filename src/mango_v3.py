@@ -6,9 +6,8 @@ Mango SpaceQuad v3 (Bricohams): parte del STL v1 del repositorio.
 
 Cambios respecto a v1:
  1. Se rellena la rosca lateral 1/4" del movil (nicho de tuerca + taladro). La funcion del movil se retira.
- 2. Soporte de walki integrado: lengueta para el clip de cinturon en la cara +Z de la torre (un lateral en uso),
-    lejos del duplexor. El clip baja por arriba entre la lengueta y la torre; el walki cuelga por fuera.
-    Funda abierta por arriba con paredes laterales (rigidez) y ventana para el saliente del clip.
+ 2. Placa baja a 20 grados sobre la torre, con dos cartelas triangulares y bajos abiertos.
+    El clip entra paralelo a la placa desde el extremo +V; ventana de retencion opcional.
  3. Tuerca 1/4"-20 del tripode mas cerca de la cara del culo (de 3,0 a TRIPOD_SKIN mm): con las placas
     rapidas de 5-6 mm de tornillo el v1 apenas cogia rosca.
 La base GoPro de la v2 se retira (legacy/soporte_gopro).
@@ -16,27 +15,24 @@ La base GoPro de la v2 se retira (legacy/soporte_gopro).
 import sys
 import numpy as np, trimesh
 import shapely.geometry as sg
-from shapely import affinity
 from geom import *
 
 # ---------------------------------------------------------------- PARAMETROS (mm)
-# lengueta del clip (X hacia la empunadura = abajo en uso, Z = hacia fuera de la torre)
-X_BOT   = -33.64      # extremo inferior (en uso) = cara +X de la torre
-FLOOR   = 5.0         # fondo cerrado de la funda
-USABLE_L = 70.0       # largo util de la lengua del clip (ESTIMADO, no medido)
-CLIP_L  = USABLE_L + FLOOR   # largo total de la lengueta
-BACK_T  = 3.0         # pared trasera sobre la cara de la torre
+# Coordenadas de uso (U,V,H) = (z,y,-x). s sigue la placa, n es su normal.
+PLATE_U0, PLATE_W = 24.0, 55.0
+PLATE_V0, PLATE_H0 = 130.0, 65.0
+PLATE_L, PLATE_T, ANGLE = 48.0, 4.0, 20.0
+USABLE_L = 40.0
+SIDE_T, MIN_CLEAR = 4.0, 7.0
+W_IN = PLATE_W - 2 * SIDE_T
+TOWER_H = 58.64
+ROOT_V0, ROOT_V1, ROOT_H0 = 140.0, 154.0, 54.0
+WIN_W, WIN_H, WIN_S = 22.0, 6.0, 14.0
+HOOK_WINDOW = True
 # Envolvente de ingenieria para clips de cinturon de walkies tipo Baofeng, Radtel, Anytone, Quansheng, Retevis RT3S.
 # ESTIMADA (25-45 mm de ancho x hasta 6 mm de grueso); solo esta verificada la separacion de 26 mm entre tornillos
 # del clip Retevis/TYT MD-380 (retevis.com). No es una validacion de ajuste universal.
 CLIP_W_MIN, CLIP_W_MAX, CLIP_T_MAX = 25.0, 45.0, 6.0   # ancho min/max y grueso max estimados de la lengua del clip
-MIN_CLEAR = 7.0       # holgura minima del canal (grueso max + 1 mm)
-G_BOT, G_TOP = MIN_CLEAR, 10.0   # hueco para la lengua del clip en el fondo / en la boca (boca en cuna)
-PLATE_T = 4.0         # grosor de la lengueta (lo que coge el clip, como un cinturon)
-W_IN, W_NARROW = 50.0, 47.0   # ancho interior en la boca y en el fondo: cuna suave, el clip de 45 mm entra a fondo (>= 47 mm libres)
-SIDE_T = 4.0          # paredes laterales; el exterior se estrecha igual que el interior (lados en cuna)
-WIN_W, WIN_H, WIN_X = 22.0, 6.0, 10.0   # ventana rectangular para el saliente del clip (ancho, alto, distancia al fondo)
-CHAMFER = 1.5         # chaflan de entrada en el borde superior
 # tripode (medido en v1): centro del taladro, cara del culo, tuerca 1/4"-20
 T_YC, T_ZC, BUTT_FACE = 115.2, 15.7, 110.0
 NUT_AF, NUT_T, NUT_HOLE = 11.4, 5.9, 6.6   # NUT_T = ranura (holgura), no el grosor del metal
@@ -45,37 +41,30 @@ OLD_SKIN, TRIPOD_SKIN = 3.0, 1.2
 # nicho/taladro de la antigua rosca lateral (medidos en v1)
 OLD_Z = 47.57
 
-def xz(poly):
-    """poligono (x,z) -> (u,z) para prism_y (u = FACE_X - x)"""
-    return affinity.affine_transform(poly, [-1, 0, 0, 1, FACE_X, 0])
+def plate_point(s, n=0.0):
+    a = np.deg2rad(ANGLE)
+    return (PLATE_V0 + s * np.cos(a) - n * np.sin(a),
+            PLATE_H0 + s * np.sin(a) + n * np.cos(a))
 
-def z_in(x, fz):
-    """cara interior de la lengueta (hueco en cuna de G_BOT a G_TOP)"""
-    return fz + BACK_T + G_BOT + (G_TOP - G_BOT) * (X_BOT - x) / CLIP_L
+def use_prism(poly_vh, u0, u1):
+    """Poligono (V,H) extruido en U, devuelto en coordenadas originales del STL."""
+    return prism_z(sg.Polygon([(FACE_X + h, v) for v, h in poly_vh]), u0, u1)
 
-def half_in(x):
-    """semiancho interior de la funda en x: W_NARROW en el fondo y W_IN en la boca (lados en cuna)"""
-    t = min(max((X_BOT - FLOOR - x) / (CLIP_L - FLOOR), 0.0), 1.0)
-    return (W_NARROW + (W_IN - W_NARROW) * t) / 2
+def plate_box(u0, u1, s0, s1, n0, n1):
+    return use_prism([plate_point(s0, n0), plate_point(s1, n0),
+                      plate_point(s1, n1), plate_point(s0, n1)], u0, u1)
 
-def plan(pad, x_end):
-    """planta (x,y) de la funda, estrechada hacia el fondo, en coordenadas (u,y) para prism_z; pad = grosor extra"""
-    xs = [X_BOT, X_BOT - FLOOR, X_BOT - CLIP_L, x_end]
-    pts = [(x, YC - half_in(x) - pad) for x in xs] + [(x, YC + half_in(x) + pad) for x in reversed(xs)]
-    return affinity.affine_transform(sg.Polygon(pts), [-1, 0, 0, 1, FACE_X, 0])
-
-def clip_holder(fz):
-    """lengueta + funda sobre la cara z = fz de la torre; lados y fondo interior en cuna"""
-    x_t = X_BOT - CLIP_L
-    zb, zt = fz + BACK_T, z_in(x_t, fz) + PLATE_T
-    env = sg.Polygon([(X_BOT, fz - 2.5), (x_t, fz - 2.5), (x_t, zt), (X_BOT, z_in(X_BOT, fz) + PLATE_T)])
-    env = env.difference(sg.Polygon([(x_t - 1, zt - CHAMFER - 1), (x_t + CHAMFER + 1, zt + 1), (x_t - 1, zt + 1)]))
-    pocket = sg.Polygon([(X_BOT - FLOOR, zb), (x_t - 1, zb), (x_t - 1, z_in(x_t - 1, fz)), (X_BOT - FLOOR, z_in(X_BOT - FLOOR, fz))])
-    wy = W_IN / 2 + SIDE_T
-    h = prism_y(xz(env), YC - wy, YC + wy) ^ prism_z(plan(SIDE_T, x_t - 1), fz - 3, fz + 60)
-    h = h - (prism_y(xz(pocket), YC - W_IN/2, YC + W_IN/2) ^ prism_z(plan(0, x_t - 1), fz - 3, fz + 60))
-    xw = X_BOT - FLOOR - WIN_X                       # borde inferior de la ventana
-    return h - box(FACE_X - xw, FACE_X - xw + WIN_H, YC - WIN_W/2, YC + WIN_W/2, zb, fz + 40)
+def clip_holder():
+    """Placa de 4 mm y dos cartelas: sin funda vertical ni suelo bajo el clip."""
+    plate = plate_box(PLATE_U0, PLATE_U0 + PLATE_W, 0, PLATE_L, 0, PLATE_T)
+    if HOOK_WINDOW:
+        uc = PLATE_U0 + PLATE_W / 2
+        plate -= plate_box(uc - WIN_W/2, uc + WIN_W/2, WIN_S, WIN_S + WIN_H, -1, PLATE_T + 1)
+    gusset = [plate_point(0, 0.2), plate_point(PLATE_L, 0.2),
+              (ROOT_V1, ROOT_H0), (ROOT_V0, ROOT_H0)]
+    for u in (PLATE_U0, PLATE_U0 + PLATE_W - SIDE_T):
+        plate += use_prism(gusset, u, u + SIDE_T)
+    return plate
 
 def tripod_fix(body, verts):
     """rellena el nicho v1 y lo vuelve a vaciar a TRIPOD_SKIN de la cara"""
@@ -100,8 +89,8 @@ def build(src, dst):
     fill = box(-9.2, -2.6, TY0, YC + 5.9, OLD_Z - 5.8, OLD_Z + 5.8)               # nicho de tuerca (x -55,6..-49,7)
     fill = fill + cyl_u(YC, OLD_Z, 3.45, -19.3, 0.2)                                # taladro Ø6,6 (x -58,6..-39,6)
     body = body + fill
-    # 2) lengueta del clip en la cara +Z de la torre (la mas alta del STL)
-    body = body + clip_holder(m.bounds[1][2])
+    # 2) placa baja sobre la cara superior de la torre (H = 58.64).
+    body = body + clip_holder()
     # 3) tuerca del tripode
     body = tripod_fix(body, m.vertices)
     out = to_tm(body)
