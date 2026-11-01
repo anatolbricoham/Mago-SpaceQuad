@@ -3,13 +3,48 @@
 Clips y radio son envolventes ESTIMADAS, no una validacion de ajuste real.
     python verificar.py stl/mango_spacequad_v3.stl [docs/cad_checks.json]
 """
+import argparse
 import io
 import json
 from pathlib import Path
 import subprocess
 import sys
-import numpy as np
+
+
+def _input_file(value):
+    path = Path(value)
+    if not path.is_file():
+        raise argparse.ArgumentTypeError(f"no existe el STL que se va a verificar: {value}")
+    return str(path)
+
+
+def _output_file(value):
+    path = Path(value)
+    if path.exists() and path.is_dir():
+        raise argparse.ArgumentTypeError(f"el informe debe ser un archivo: {value}")
+    if not path.parent.is_dir():
+        raise argparse.ArgumentTypeError(f"no existe el directorio del informe: {path.parent}")
+    return str(path)
+
+
+def _parse_cli():
+    parser = argparse.ArgumentParser(
+        description="Ejecuta las comprobaciones CAD de la placa v3; no certifica ajuste ni resistencia físicos.",
+        epilog="Ejemplo: python src/verificar.py stl/mango_spacequad_v3.stl docs/cad_checks.json",
+    )
+    parser.add_argument("mesh", type=_input_file, help="STL v3 que se comprobará")
+    parser.add_argument("report", nargs="?", type=_output_file, help="JSON de resultados (opcional)")
+    args = parser.parse_args()
+    if args.report and Path(args.mesh).resolve() == Path(args.report).resolve():
+        parser.error("el informe no puede sobrescribir el STL")
+    return args
+
+
+if __name__ == "__main__":
+    _cli_args = _parse_cli()
+
 import trimesh
+import numpy as np
 from geom import *
 import mango_v3 as mg
 
@@ -168,4 +203,4 @@ def main(path, report=None):
     return passed
 
 if __name__ == "__main__":
-    sys.exit(0 if main(*sys.argv[1:]) else 1)
+    sys.exit(0 if main(_cli_args.mesh, _cli_args.report) else 1)

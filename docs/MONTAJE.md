@@ -1,5 +1,7 @@
 # Montaje
 
+**Ayuda:** [guía del proyecto](AYUDA.md) · [materiales](MATERIALES.md) · [README](../README.md).
+
 ![Detalle de la lengüeta del clip](img/mango_detalles.png)
 
 ## 1. Preparar el mango
@@ -28,7 +30,7 @@ Las medidas (25–45 mm × 6 mm) son estimaciones, no medidas verificadas: prueb
 
 1. Saca la placa rápida de la rótula y enróscala en el culo de la empuñadura.
 2. Encaja la placa en la rótula. La empuñadura queda hacia abajo y el boom horizontal.
-3. Con el walki puesto, comprueba que su base no toque la rótula: comprueba que el walki no choque con la rótula.
+3. Con el walki puesto, comprueba que su base no toque la rótula.
 
 ## Consejos
 

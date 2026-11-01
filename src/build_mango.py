@@ -14,7 +14,43 @@ Pasos:
     y mete una tuerca 1/4"-20 para el tripode.
 Todas las cotas estan en mm y se pueden cambiar en la seccion PARAMETROS.
 """
+import argparse
+from pathlib import Path
 import sys, collections
+
+
+def _input_file(value):
+    path = Path(value)
+    if not path.is_file():
+        raise argparse.ArgumentTypeError(f"no existe el STL original: {value}")
+    return str(path)
+
+
+def _output_file(value):
+    path = Path(value)
+    if path.exists() and path.is_dir():
+        raise argparse.ArgumentTypeError(f"la salida debe ser un archivo: {value}")
+    if not path.parent.is_dir():
+        raise argparse.ArgumentTypeError(f"no existe el directorio de salida: {path.parent}")
+    return str(path)
+
+
+def _parse_cli():
+    parser = argparse.ArgumentParser(
+        description="Generador histórico v1; requiere el STL original no incluido y CadQuery.",
+        epilog="Ejemplo (si dispones del original): python src/build_mango.py original.stl stl/mango_spacequad_tripode.stl",
+    )
+    parser.add_argument("source", type=_input_file, help="STL original externo")
+    parser.add_argument("destination", type=_output_file, help="STL v1 de salida")
+    args = parser.parse_args()
+    if Path(args.source).resolve() == Path(args.destination).resolve():
+        parser.error("la entrada y la salida no pueden ser el mismo archivo")
+    return args
+
+
+if __name__ == "__main__":
+    _cli_args = _parse_cli()
+
 import numpy as np, trimesh, manifold3d as mf, shapely.geometry as sg
 import cadquery as cq
 
@@ -121,5 +157,4 @@ def build(src, dst):
     print(f"OK -> {dst}  medidas {np.round(out.extents,1)} mm  volumen {R.volume()/1000:.0f} cm3")
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3: sys.exit(__doc__)
-    build(sys.argv[1], sys.argv[2])
+    build(_cli_args.source, _cli_args.destination)

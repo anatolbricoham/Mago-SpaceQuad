@@ -1,5 +1,7 @@
 # Lista de materiales
 
+**Ayuda:** [guía del proyecto](AYUDA.md) · [montaje](MONTAJE.md) · [README](../README.md).
+
 ## Piezas impresas
 
 | Archivo | Cantidad | Volumen aprox. | Notas |

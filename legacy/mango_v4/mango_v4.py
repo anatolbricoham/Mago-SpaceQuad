@@ -14,7 +14,43 @@ Cambios respecto a v1:
  3. Tuerca 1/4"-20 del tripode a TRIPOD_SKIN de la cara del culo y ranura para NUT_N tuercas apiladas:
     la rosca empieza a 1,2 mm y un tornillo de 10 mm coge 8,8 mm (con una sola tuerca, 5,9 mm).
 """
+import argparse
+from pathlib import Path
 import sys
+
+
+def _input_file(value):
+    path = Path(value)
+    if not path.is_file():
+        raise argparse.ArgumentTypeError(f"no existe el STL v1 de entrada: {value}")
+    return str(path)
+
+
+def _output_file(value):
+    path = Path(value)
+    if path.exists() and path.is_dir():
+        raise argparse.ArgumentTypeError(f"la salida debe ser un archivo: {value}")
+    if not path.parent.is_dir():
+        raise argparse.ArgumentTypeError(f"no existe el directorio de salida: {path.parent}")
+    return str(path)
+
+
+def _parse_cli():
+    parser = argparse.ArgumentParser(
+        description="Generador histórico de la v4 con canal en V; requiere src/geom.py importable y no es el diseño STL actual.",
+        epilog="Ejemplo histórico: python legacy/mango_v4/mango_v4.py stl/mango_spacequad_tripode.stl legacy/mango_v4/mango_spacequad_v4.stl",
+    )
+    parser.add_argument("source", type=_input_file, help="STL v1 de entrada")
+    parser.add_argument("destination", type=_output_file, help="STL v4 histórico de salida")
+    args = parser.parse_args()
+    if Path(args.source).resolve() == Path(args.destination).resolve():
+        parser.error("la entrada y la salida no pueden ser el mismo archivo")
+    return args
+
+
+if __name__ == "__main__":
+    _cli_args = _parse_cli()
+
 import numpy as np, trimesh
 from geom import *
 
@@ -117,5 +153,4 @@ def build(src, dst):
     print("OK ->", dst, np.round(out.extents, 1), "mm", round(body.volume()/1000, 1), "cm3", body.status())
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3: sys.exit(__doc__)
-    build(sys.argv[1], sys.argv[2])
+    build(_cli_args.source, _cli_args.destination)

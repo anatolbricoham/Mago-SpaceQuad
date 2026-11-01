@@ -8,6 +8,9 @@ Mango imprimible en 3D para la antena de satélites **BIG SIGNAL SpaceQuad** (VH
 Se puede llevar en la mano o montar en un trípode de fotografía. Lleva una **lengüeta ancha para el clip de cinturón del walki**
 en la torre y una funda para el duplexor.
 
+> **Ayuda y navegación:** [guía completa de uso, instalación y scripts](docs/AYUDA.md) ·
+> [montaje](docs/MONTAJE.md) · [materiales](docs/MATERIALES.md) · [cambios](CHANGELOG.md).
+
 <p align="center">
   <img src="docs/img/vista_uso.png" alt="Conjunto en posición de uso" width="90%">
 </p>
@@ -68,7 +71,7 @@ El walki se sujeta con su propio clip de cinturón: no hace falta tornillería.
 
 | Pieza | Material | Orientación | Soportes |
 |---|---|---|---|
-| Mango v3 | PETG o ASA (exterior, al sol) | La del STL | Sí, desde la cama (bajo la empuñadura y la torre) y bajo la lengüeta del clip |
+| Mango v3 | PETG o ASA (exterior, al sol) | La del STL | Sí, desde la cama (bajo la empuñadura y la torre) y bajo la placa/cartelas |
 
 0,2 mm de capa, 4 perímetros y 30–40 % de relleno.
 
@@ -96,17 +99,16 @@ No se garantiza ajuste universal: comprueba el clip de tu walki. Las medidas se 
 ## Regenerar las piezas
 
 ```bash
-pip install -r src/requirements.txt
-cd src
-python mango_v3.py ../stl/mango_spacequad_tripode.stl ../stl/mango_spacequad_v3.stl
-python verificar.py ../stl/mango_spacequad_v3.stl ../docs/cad_checks.json
-python render_docs.py ../stl ../docs/img                # imágenes
+python -m pip install -r src/requirements.txt
+python src/mango_v3.py stl/mango_spacequad_tripode.stl stl/mango_spacequad_v3.stl
+python src/verificar.py stl/mango_spacequad_v3.stl docs/cad_checks.json
+python src/render_docs.py stl docs/img
 ```
 
 `mango_v3.py` parte del STL v1 incluido en el repositorio. `verificar.py` compara con la revisión anterior leyéndola de git (`35019cc`),
 así que hay que ejecutarlo dentro del clon. `build_mango.py` (v1) parte del **STL original del mango**,
 que no está incluido (ver *Créditos*) y necesita además `cadquery`.
-Las medidas se cambian en la sección `PARAMETROS` de cada script.
+Consulta las opciones y advertencias antes de regenerar en [docs/AYUDA.md](docs/AYUDA.md); las medidas se cambian en la sección `PARAMETROS` de cada script.
 
 ## Estado
 

@@ -8,7 +8,33 @@ Genera pinza_movil_cuerpo y pinza_movil_mordaza en STL (orientados para
 imprimir, cara trasera sobre la cama) y en STEP.
 Rango: moviles de 58 a 92 mm de ancho y hasta 12 mm de grosor con funda.
 """
+import argparse
+from pathlib import Path
 import os, sys
+
+
+def _output_directory(value):
+    path = Path(value)
+    if path.exists() and not path.is_dir():
+        raise argparse.ArgumentTypeError(f"la salida debe ser un directorio: {value}")
+    if not path.parent.is_dir():
+        raise argparse.ArgumentTypeError(f"no existe el directorio padre de salida: {path.parent}")
+    return str(path)
+
+
+def _parse_cli():
+    parser = argparse.ArgumentParser(
+        description="Generador archivado de una pinza ajustable para móvil; requiere CadQuery.",
+        epilog="Ejemplo histórico: python legacy/pinza_movil/pinza_movil.py legacy/pinza_movil/salida",
+    )
+    parser.add_argument("stl_dir", nargs="?", type=_output_directory, default=".", help="directorio para STL (por defecto: actual)")
+    parser.add_argument("step_dir", nargs="?", type=_output_directory, help="directorio para STEP (por defecto: el de STL)")
+    return parser.parse_args()
+
+
+if __name__ == "__main__":
+    _cli_args = _parse_cli()
+
 import numpy as np, trimesh
 import cadquery as cq
 
@@ -51,8 +77,8 @@ def export(wp, name, stl_dir, step_dir):
     print(f"OK -> {name}: {np.round(m.extents,1)} mm, {wp.val().Volume()/1000:.1f} cm3")
 
 if __name__ == "__main__":
-    stl_dir = sys.argv[1] if len(sys.argv) > 1 else "."
-    step_dir = sys.argv[2] if len(sys.argv) > 2 else stl_dir
+    stl_dir = _cli_args.stl_dir
+    step_dir = _cli_args.step_dir or stl_dir
     os.makedirs(stl_dir, exist_ok=True); os.makedirs(step_dir, exist_ok=True)
     export(cuerpo(), "pinza_movil_cuerpo", stl_dir, step_dir)
     export(mordaza(), "pinza_movil_mordaza", stl_dir, step_dir)

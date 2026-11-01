@@ -12,7 +12,32 @@ Piezas:
                           cerrar sobre el walki. Cubre de WMIN a WMAX de ancho y hasta TMAX de grosor.
 Todo en el mismo sistema de coordenadas que el mango v2 (ver geom.py).
 """
+import argparse
+from pathlib import Path
 import sys, os
+
+
+def _output_directory(value):
+    path = Path(value)
+    if path.exists() and not path.is_dir():
+        raise argparse.ArgumentTypeError(f"la salida debe ser un directorio: {value}")
+    if not path.parent.is_dir():
+        raise argparse.ArgumentTypeError(f"no existe el directorio padre de salida: {path.parent}")
+    return str(path)
+
+
+def _parse_cli():
+    parser = argparse.ArgumentParser(
+        description="Generador archivado del soporte GoPro v2; necesita sus módulos históricos mango_v2.py y geom.py.",
+        epilog="Ejemplo histórico: python legacy/soporte_gopro/soporte_walki.py legacy/soporte_gopro/salida",
+    )
+    parser.add_argument("output_dir", nargs="?", type=_output_directory, default=".", help="directorio de salida (por defecto: actual)")
+    return parser.parse_args()
+
+
+if __name__ == "__main__":
+    _cli_args = _parse_cli()
+
 import numpy as np, trimesh
 import shapely.geometry as sg
 from geom import *
@@ -109,7 +134,7 @@ def export_print(M, path, kind):
     print(f"OK -> {path} {np.round(m.extents,1)} mm {M.volume()/1000:.1f} cm3")
 
 if __name__ == "__main__":
-    out = sys.argv[1] if len(sys.argv) > 1 else "."
+    out = _cli_args.output_dir
     os.makedirs(out, exist_ok=True)
     A = adaptador(); J1 = mordaza(+1)
     export_print(A, os.path.join(out, "adaptador_gopro_walki.stl"), "adaptador")

@@ -1,5 +1,11 @@
 # Cambios
 
+**Ayuda:** [guía del proyecto](docs/AYUDA.md) · [README](README.md) · [montaje](docs/MONTAJE.md) · [materiales](docs/MATERIALES.md).
+
+## Ayuda, CLI e imágenes — 2026-11-01
+- Índice de ayuda en español, navegación cruzada y opciones `-h`/`--help` sin dependencias CAD.
+- Renders explicativos del STL v3 actual: conjunto estimado, acceso al duplexor y detalle de placa/cartelas; sin cambios de STL ni de resultados CAD.
+
 ## Revisión de placa baja v3 — 2026-11-01
 - Sustituye la funda vertical por placa de 55 × 48 × 4 mm a 20°, 47 mm libres, recorrido de 40 mm, espacio de 7 mm y ventana opcional de 22 × 6 mm.
 - Dos cartelas de 4 mm con pies V140..154 a H54, embebidos 4,64 mm en la torre existente; bajos abiertos, sin losa.
@@ -7,15 +13,15 @@
 - Corredores V del duplexor sin obstrucción nueva; colisión nominal heredada de v1 (462,2388 mm³) documentada, no ocultada.
 - Renders CAD y resultados JSON actualizados. Dimensiones de clip/radio estimadas; sin prueba física ni certificación estructural.
 
-## v3.1.0 — 2026-11-01
-- Se restaura la v3 (c77de14) como modelo activo: lengüeta del clip en la torre y tuerca única de trípode a 1,2 mm (ranura de 5,9 mm; rosca limitada por la tuerca real, 5,6 mm nominal).
-- Solo cambia el soporte del clip: lengüeta elevada más ancha (boca 50 mm, fondo 47 mm, 70 mm útiles, holgura mín. 7 mm, paredes en cuña), conserva la ventana rectangular de 22 × 6 mm.
+## v3.1.0 — 2026-11-01 (diseño histórico, sustituido)
+- En esa revisión se restaura la v3 (c77de14) como modelo activo: lengüeta del clip en la torre y tuerca única de trípode a 1,2 mm (ranura de 5,9 mm; rosca limitada por la tuerca real, 5,6 mm nominal).
+- La descripción de esta versión (boca 50 mm, fondo 47 mm, 70 mm útiles y paredes en cuña) corresponde al diseño anterior; no describe el STL actual. La revisión vigente, arriba, usa una placa de 55 × 48 × 4 mm a 20°, 47 mm libres, 40 mm de inserción y dos cartelas.
   Dimensiones del clip (25–45 × 6 mm) estimadas, no verificadas; solo se conoce la separación de 26 mm entre tornillos del clip Retevis/TYT MD-380 (https://www.retevis.com/products/belt-clip-for-tyt-tytera-md-380-retevis-rt3-radio).
 - La v4 (canal en V, dos tuercas) se archiva en legacy/mango_v4/.
-- verificar.py compara contra la v3 original (git c77de14): manifold, un sólido, localidad de cambios, barrido del clip, duplexor y tuerca.
+- El verificador de aquel snapshot comparaba contra git c77de14; el script vigente compara contra 35019cc.
 - Nueva imagen docs/img/clip_detalle.png.
 
-## v4.0.0 — 2026-11-01
+## v4.0.0 — 2026-11-01 (diseño histórico, archivado)
 - Canal universal en V para el clip del walki en la cara superior de la empuñadura (lenguas de 25 a 45 mm y hasta 6 mm de grosor).
   Labios en cola de milano a 45° (sin soportes); la lengua baja por la V hasta acuñarse. Sustituye a la lengüeta de la torre de la v3.
 - Ranura del trípode para dos tuercas 1/4"-20 apiladas (rosca a 1,2 mm de la cara; 8,8 mm de rosca con un tornillo de 10 mm).

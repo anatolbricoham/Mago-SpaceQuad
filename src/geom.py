@@ -1,4 +1,6 @@
-"""Utilidades geometricas compartidas (trimesh + manifold3d + shapely).
+"""Biblioteca de utilidades geométricas compartidas; no es un comando CLI.
+
+Requiere trimesh, manifold3d, shapely y numpy.
 Sistema de coordenadas del mango: X hacia la empunadura, Y a lo largo del boom, Z hacia la torre.
 La cara libre de la torre (la que queda ARRIBA al usar la antena con la empunadura hacia abajo) es X = FACE_X.
 Para las piezas del soporte se usa u = distancia hacia fuera de esa cara (x = FACE_X - u)."""
