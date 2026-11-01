@@ -1,5 +1,13 @@
 # Cambios
 
+## v3.1.0 — 2026-11-01
+- Se restaura la v3 (c77de14) como modelo activo: lengüeta del clip en la torre y tuerca única de trípode a 1,2 mm (ranura de 5,9 mm; rosca limitada por la tuerca real, 5,6 mm nominal).
+- Solo cambia el soporte del clip: lengüeta elevada más ancha (boca 50 mm, fondo 47 mm, 70 mm útiles, holgura mín. 7 mm, paredes en cuña), conserva la ventana rectangular de 22 × 6 mm.
+  Dimensiones del clip (25–45 × 6 mm) estimadas, no verificadas; solo se conoce la separación de 26 mm entre tornillos del clip Retevis/TYT MD-380 (https://www.retevis.com/products/belt-clip-for-tyt-tytera-md-380-retevis-rt3-radio).
+- La v4 (canal en V, dos tuercas) se archiva en legacy/mango_v4/.
+- verificar.py compara contra la v3 original (git c77de14): manifold, un sólido, localidad de cambios, barrido del clip, duplexor y tuerca.
+- Nueva imagen docs/img/clip_detalle.png.
+
 ## v4.0.0 — 2026-11-01
 - Canal universal en V para el clip del walki en la cara superior de la empuñadura (lenguas de 25 a 45 mm y hasta 6 mm de grosor).
   Labios en cola de milano a 45° (sin soportes); la lengua baja por la V hasta acuñarse. Sustituye a la lengüeta de la torre de la v3.

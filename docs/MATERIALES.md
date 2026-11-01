@@ -4,7 +4,7 @@
 
 | Archivo | Cantidad | Volumen aprox. | Notas |
 |---|---|---|---|
-| `stl/mango_spacequad_v4.stl` | 1 | 201 cm³ (sólido) | Con soportes. PETG o ASA |
+| `stl/mango_spacequad_v3.stl` | 1 | 224 cm³ (sólido) | Con soportes. PETG o ASA |
 
 El volumen es el del modelo macizo. Con 4 perímetros y un 35 % de relleno el mango gasta unos 105–125 g de filamento.
 
@@ -12,7 +12,7 @@ El volumen es el del modelo macizo. Con 4 perímetros y un 35 % de relleno el ma
 
 | Cantidad | Pieza | Dónde va |
 |---|---|---|
-| 2 | Tuercas hexagonales 1/4"-20 UNC (11,1 mm e/c, 5,6 mm de grosor) | Culo de la empuñadura (trípode), apiladas. Opcional; con una basta si el tornillo es largo |
+| 1 | Tuerca hexagonal 1/4"-20 UNC (11,1 mm e/c, 5,6 mm de grosor nominal) | Culo de la empuñadura (trípode). Opcional |
 
 ## Accesorios comerciales
 
@@ -26,7 +26,7 @@ El volumen es el del modelo macizo. Con 4 perímetros y un 35 % de relleno el ma
 
 | Dato | Valor |
 |---|---|
-| Ancho de la lengua del clip | de 25 a 45 mm |
-| Grosor de la lengua del clip | hasta 6 mm |
-| Grosor de los labios (abertura mínima del clip) | de 1,5 a 4,5 mm |
-| Walki | cualquiera con clip de cinturón dentro de estas medidas |
+| Ancho de la lengua del clip (estimado, no medido) | de 25 a 45 mm; boca 50 mm, fondo 47 mm |
+| Grosor de la lengua del clip (estimado) | hasta 6 mm (holgura mínima 7 mm) |
+| Largo útil (estimado) | 70 mm |
+| Walki | clips de cinturón de Baofeng, Radtel, Anytone, Quansheng, Retevis RT3S: no medidos, sin garantía de ajuste universal |

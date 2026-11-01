@@ -3,5 +3,6 @@ manifold3d>=2.4
 shapely>=2.0
 numpy>=1.24
 scipy>=1.10
+rtree>=1.0   # trimesh.proximity (verificar.py)
 pyvista>=0.43   # solo para render_docs.py
 cadquery>=2.4   # solo para build_mango.py (v1)
